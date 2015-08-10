@@ -13,22 +13,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-    
-//    func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
-//        let options = prettyPrinted ? NSJSONWritingOptions.PrettyPrinted : NSJSONWritingOptions(rawValue: 0)
-//        if NSJSONSerialization.isValidJSONObject(value) {
-//            do{
-//                let data = try NSJSONSerialization.dataWithJSONObject(value, options: options)
-//                if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
-//                    return string as String
-//                }
-//            }catch {
-//                print("error")
-//                //Access error here
-//            }
-//        }
-//        return ""
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +23,20 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let urlContent = dataFromGoogle {
                 do {
                     let jsonObject = try NSJSONSerialization.JSONObjectWithData(urlContent, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-                    print(jsonObject)
-                    if let items = jsonObject?["items"] as? NSArray {
-                        if let author = items[0]["author"] as? NSDictionary {
-                            if let displayName = author["displayName"] as? NSString {
-                                print(displayName)
-                            }
-                        }
-                    }
+//                    print(jsonObject)
+                    
+                    let items = jsonObject?["items"] as? NSArray
+                    let author = items?[0]["author"] as? NSDictionary
+                    let displayName = author?["displayName"] as? NSString
+                    print(displayName!)
+                    
+//                    if let items = jsonObject?["items"] as? NSArray {
+//                        if let author = items[0]["author"] as? NSDictionary {
+//                            if let displayName = author["displayName"] as? NSString {
+//                                print(displayName)
+//                            }
+//                        }
+//                    }
                 } catch {
                     print("JSON serialization failed")
                 }
