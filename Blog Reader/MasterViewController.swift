@@ -23,12 +23,28 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let urlContent = dataFromGoogle {
                 do {
                     let jsonObject = try NSJSONSerialization.JSONObjectWithData(urlContent, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-//                    print(jsonObject)
                     
-                    let items = jsonObject?["items"] as? NSArray
-                    let author = items?[0]["author"] as? NSDictionary
-                    let displayName = author?["displayName"] as? NSString
-                    print(displayName!)
+                    let item = jsonObject?["items"] as! NSArray
+                    let post = item[0] as! NSDictionary
+                    
+                    let title = post["title"]!
+                    
+                    let author = post["author"] as! NSDictionary
+                    let displayName = author["displayName"]!
+                    
+                    let publishedDate = post["published"]!
+                
+                    let content = post["content"]!
+                    
+                    print(title)
+                    print(displayName)
+                    print(publishedDate)
+                    print(content)
+
+//                    let content = item?[0]["content"] as? NSString
+//                    let title = item?[0]["title"] as? NSString
+//                    let publishedDate = item?[0]["published"]
+//                    print(author!)
                     
 //                    if let items = jsonObject?["items"] as? NSArray {
 //                        if let author = items[0]["author"] as? NSDictionary {
