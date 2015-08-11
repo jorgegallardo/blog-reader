@@ -35,21 +35,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                         let title = post["title"]!
                         postsArray[i]["title"] = title as? String
                         
-//                        let author = post["author"] as! NSDictionary
-//                        let displayName = author["displayName"]!
-//                        
-//                        let publishedDate = post["published"]!
-//                        
-//                        let content = post["content"]!
+                        let author = post["author"] as! NSDictionary
+                        let displayName = author["displayName"]!
+                        postsArray[i]["displayName"] = displayName as? String
                         
-//                        print(title)
-//                        print(displayName)
-//                        print(publishedDate)
-//                        print(content)
+                        let publishedDate = post["published"]!
+                        postsArray[i]["publishedDate"] = publishedDate as? String
+                        
+                        let content = post["content"]!
+                        postsArray[i]["content"] = content as? String
+                        
                     }
                     print(postsArray[0])
-                    print(postsArray[1])
-                    print(postsArray[2])
                 } catch {
                     print("JSON serialization failed")
                 }
