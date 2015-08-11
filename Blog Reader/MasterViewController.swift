@@ -23,36 +23,33 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let urlContent = dataFromGoogle {
                 do {
                     let jsonObject = try NSJSONSerialization.JSONObjectWithData(urlContent, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                    var postsArray = [[String:String]()]
                     
                     let item = jsonObject?["items"] as! NSArray
-                    let post = item[0] as! NSDictionary
                     
-                    let title = post["title"]!
-                    
-                    let author = post["author"] as! NSDictionary
-                    let displayName = author["displayName"]!
-                    
-                    let publishedDate = post["published"]!
-                
-                    let content = post["content"]!
-                    
-                    print(title)
-                    print(displayName)
-                    print(publishedDate)
-                    print(content)
-
-//                    let content = item?[0]["content"] as? NSString
-//                    let title = item?[0]["title"] as? NSString
-//                    let publishedDate = item?[0]["published"]
-//                    print(author!)
-                    
-//                    if let items = jsonObject?["items"] as? NSArray {
-//                        if let author = items[0]["author"] as? NSDictionary {
-//                            if let displayName = author["displayName"] as? NSString {
-//                                print(displayName)
-//                            }
-//                        }
-//                    }
+                    for var i = 0; i < item.count; i++ {
+                        postsArray.append([String:String]())
+                        
+                        let post = item[i] as! NSDictionary
+                        
+                        let title = post["title"]!
+                        postsArray[i]["title"] = title as? String
+                        
+//                        let author = post["author"] as! NSDictionary
+//                        let displayName = author["displayName"]!
+//                        
+//                        let publishedDate = post["published"]!
+//                        
+//                        let content = post["content"]!
+                        
+//                        print(title)
+//                        print(displayName)
+//                        print(publishedDate)
+//                        print(content)
+                    }
+                    print(postsArray[0])
+                    print(postsArray[1])
+                    print(postsArray[2])
                 } catch {
                     print("JSON serialization failed")
                 }
